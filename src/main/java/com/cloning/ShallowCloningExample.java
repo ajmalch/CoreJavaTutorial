@@ -2,6 +2,7 @@ package com.cloning;
 
 public class ShallowCloningExample  {
 	
+	
 	public static void main( String[] args){
 		
 		Department dept1= new Department("HR", 100001, " HR Department ");
