@@ -1,6 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea/encodings.xml
-.idea/kotlinc.xml
-.idea/misc.xml
-.idea/workspace.xml
+.idea/
 target/
+/CoreJavaTutorial.iml
