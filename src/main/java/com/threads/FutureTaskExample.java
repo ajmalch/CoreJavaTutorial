@@ -1,12 +1,7 @@
 package com.threads;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
- 
+import java.util.concurrent.*;
+
 public class FutureTaskExample {
  
     public static void main(String[] args) {
@@ -17,6 +12,7 @@ public class FutureTaskExample {
         FutureTask<String> futureTask2 = new FutureTask<String>(callable2);
  
         ExecutorService executor = Executors.newFixedThreadPool(2);
+
         executor.execute(futureTask1);
         executor.execute(futureTask2);
          
