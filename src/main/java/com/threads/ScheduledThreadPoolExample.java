@@ -20,8 +20,8 @@ public class ScheduledThreadPoolExample {
         System.out.println("The time is  " + new Date());
 
         for (int i=0;i<10;i++){
-            int wait_time=5;
-            if(i%2==0) wait_time=10;
+            int wait_time=15;
+            if(i%2==0) wait_time=30;
             executor.schedule(tasks[i],wait_time, TimeUnit.SECONDS);
         }
         //executor.schedule(tasks[3],2, TimeUnit.SECONDS);

@@ -21,6 +21,7 @@ public abstract class Person {
 		this.age = age;
 	}
 	public Gender getGender() {
+		System.out.println(Thread.currentThread().getName());
 		return sex;
 	}
 	public void setGender(Gender gender) {

@@ -24,8 +24,9 @@ public class Comparison {
 		System.out.println(people);
 		
 		//people.sort((a1,a2)->a1.getAge()-(a2.getAge()));
-		people.sort(Comparator.comparing(Person::getName).thenComparing(Person::getAge));
+		people.sort(Comparator.comparing(Person::getName).thenComparing(Person::getAge).reversed());
 		System.out.println(people);
+		
 	}
 	
 	

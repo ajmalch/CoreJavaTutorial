@@ -8,7 +8,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
- 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class MyCallable implements Callable<String> {
  
     @Override
@@ -26,12 +28,15 @@ public class MyCallable implements Callable<String> {
         list = new ArrayList<>();
         //Create MyCallable instance
         Callable<String> callable = new MyCallable();
-        for(int i=0; i< 100; i++){
-            //submit Callable tasks to be executed by thread pool
-            Future<String> future = executor.submit(callable);
-            //add Future to the list, we can get return value using Future
-            list.add(future);
-        }
+//        for(int i=0; i< 100; i++){
+//            //submit Callable tasks to be executed by thread pool
+//            Future<String> future = executor.submit(callable);
+//            //add Future to the list, we can get return value using Future
+//            list.add(future);
+//        }
+        IntStream.range(0,100)
+                .forEach(i-> list.add(executor.submit(callable)));
+
         for(Future<String> fut : list){
             try {
                 //print the return value of Future, notice the output delay in console

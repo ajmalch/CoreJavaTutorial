@@ -6,6 +6,7 @@ import com.model.Gender;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -30,13 +31,18 @@ public class MapReduceExample {
 
 		Supplier<Stream<Employee>> matureMenStream = (()->
 			users.parallelStream()
-					.filter(male->male.getGender().equals(Gender.MALE)&&
-							male.getAge()>20));
+					.filter(filterMatureMen()));
 
         double male_average=matureMenStream.get()
         		.mapToDouble(s->s.getSalary().doubleValue()).average().getAsDouble();
 
 		System.out.println("Average Salary of Men with age 20 and above is : " +male_average);
+	}
+
+	private static Predicate<Employee> filterMatureMen() {
+		return male -> male.getGender()
+				.equals(Gender.MALE) &&
+				male.getAge() > 20;
 	}
 
 }
