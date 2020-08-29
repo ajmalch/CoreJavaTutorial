@@ -31,7 +31,7 @@ public class XMLCreation {
 		XMLCreation sample= new XMLCreation();
 		Document document=sample.createDocument();
 		String fileseparator=System.getProperty("file.separator");
-		try(FileWriter fw= new FileWriter("D:"+fileseparator+"Ajmal"+fileseparator+"sample.xml");){
+		try(FileWriter fw= new FileWriter("/Users"+fileseparator+"Ajmal"+fileseparator+"sample.xml", true);){
 			document.write(fw);
 		}catch(IOException ex){
 			ex.printStackTrace();

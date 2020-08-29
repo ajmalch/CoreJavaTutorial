@@ -1,11 +1,6 @@
 package com.comparison;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ComparisonExample implements Comparator<Person> {
 
@@ -13,11 +8,12 @@ public class ComparisonExample implements Comparator<Person> {
 	 * 
 	 */
 	private ComparisonExample(){}
-	
-	public static ComparisonExample INSTANCE=new ComparisonExample();
-	public static void main(String[] args){
-		
-		Set<Person> people=new TreeSet<>();
+
+    private static ComparisonExample INSTANCE = new ComparisonExample();
+
+    public static void main(String[] args) {
+
+        Set<Person> people=new TreeSet<>();
 		
 		Person p1= new Person("Ajmal",30);
 		Person p2= new Person("Shadiya",25);
@@ -38,14 +34,18 @@ public class ComparisonExample implements Comparator<Person> {
 		p_list.add(new Person("Ajmal", 30));
 		System.out.println("list before comparator sorting");
 		System.out.println(p_list);
-		Collections.sort(p_list,INSTANCE);
-		System.out.println("list after comparator sorting");
+        p_list.sort(INSTANCE);
+        System.out.println("list after comparator sorting");
 		System.out.println(p_list);
 		Set<Person> people_reverse=new TreeSet<>(Collections.reverseOrder());
 		people_reverse.addAll(people);
-		
-		System.out.println("The reverse sorted treeset is");
-		System.out.println(people_reverse);
+
+        System.out.println("List after Java 8 Sorting");
+        p_list.sort(Comparator.comparingInt(Person::getAge).thenComparing(Person::getName));
+        System.out.println(p_list);
+
+        System.out.println("The reverse sorted treeset is");
+        System.out.println(people_reverse);
 		
 		Set<Person> people_comparator=new TreeSet<>(INSTANCE);
 		people_comparator.addAll(people);

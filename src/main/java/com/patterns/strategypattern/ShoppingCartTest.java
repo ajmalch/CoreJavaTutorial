@@ -17,6 +17,9 @@ public class ShoppingCartTest {
 		mycart.purchase(new CreditCardStrategy(1234,"Ajmal",new Date(),1234));
 		
 		mycart.purchase(new PaypalStrategy("ajmalch@gmail.com","1234"));
-		
+
+		mycart.purchase((amount)->{
+			System.out.println(amount + "paid with another method");
+		});
 	}
 }

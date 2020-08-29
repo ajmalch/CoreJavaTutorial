@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 /target/
 /.settings/
 /.classpath
 /.DS_Store
 /.project
+=======
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+target/
+/CoreJavaTutorial.iml
+>>>>>>> 4ef8fab5b59598c353fac5c66140587af4164a33

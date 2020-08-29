@@ -15,19 +15,19 @@ public class PickeElementsMultipleCollection {
 	final List<String> editors =
 	Arrays.asList("Brian", "Jackie", "John", "Mike");
 			
-	final Function<String, Predicate<String>> startsWithletter;
+	final Function<Character, Predicate<String>> startsWithletter;
 
 	final Function<String, Predicate<String>> containsWord;
 
 	{
 		containsWord = word -> name -> name.contains(word);
-		startsWithletter = letter -> name -> name.startsWith(letter);
+		startsWithletter = letter -> name -> name.startsWith(letter.toString());
 	}
 
 	public static void main(String[] args){
 		PickeElementsMultipleCollection sample= new PickeElementsMultipleCollection();
-		System.out.println(sample.friends.stream().filter(sample.startsWithletter.apply("N")).count());
-		System.out.println(sample.comrades.stream().filter(sample.startsWithletter.apply("M")).count());
+		System.out.println(sample.friends.stream().filter(sample.startsWithletter.apply('N')).count());
+		System.out.println(sample.comrades.stream().filter(sample.startsWithletter.apply('M')).count());
 		System.out.println(sample.editors.stream().filter(sample.containsWord.apply("J")).count());
 	}
 }
