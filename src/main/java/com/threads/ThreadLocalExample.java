@@ -1,18 +1,22 @@
 package com.threads;
 
+
+import java.util.HashMap;
+import java.util.concurrent.ForkJoinPool;
+import java.util.stream.IntStream;
+
+import static java.util.concurrent.Executors.newFixedThreadPool;
+
 public class ThreadLocalExample implements Runnable {
 
-	private static ThreadLocal<Integer> thread_local=new ThreadLocal<Integer>(){
-		@Override
-		protected Integer initialValue(){
-			return Integer.valueOf(0);
-		}
-	}; 
+	private static final ThreadLocal<Integer> thread_local= new ThreadLocal<>();
+
+	private static ThreadLocal<HashMap<Integer,String>> mapThreadLocal = ThreadLocal.withInitial(()->new HashMap<>());
 	
-	private Processor processor;
+	private final Processor processor;
 
 
-	private int value;
+	private final int value;
 	
 	public ThreadLocalExample(int value, Processor prc){
 
@@ -28,9 +32,12 @@ public class ThreadLocalExample implements Runnable {
 			
 			thread_local.get();
 			thread_local.set(value);
-			System.out.println("Thread Local value of "+Thread.currentThread().getName()+"is "+ thread_local.get() );
 			processor.process();
-			System.out.println("Thread Local value of "+Thread.currentThread().getName()+"is "+ thread_local.get() );
+			mapThreadLocal.get()
+					.put(thread_local.get(), Thread.currentThread()
+							.getName());
+			thread_local.remove();
+			System.out.println("Map for current thread is " + mapThreadLocal.get());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,14 +50,16 @@ public class ThreadLocalExample implements Runnable {
 	}
 
 	public static void main(String[] args){
-		
+
+		final var executorService = newFixedThreadPool(5);
+
 		Processor prc=new Processor();
-		Thread t1=new Thread(new ThreadLocalExample(12,prc));
-		Thread t2=new Thread(new ThreadLocalExample(15,prc));
-		Thread t3=new Thread(new ThreadLocalExample(122,prc));
-		t1.start();
-		t2.start();
-		t3.start();
+		IntStream.iterate(0,i->i<50,i->++i)
+				.forEach(i->{
+					executorService.execute(new ThreadLocalExample(i, prc));
+				});
+
+		executorService.shutdown();
 	}
 	
 }
@@ -60,8 +69,10 @@ class Processor{
 	
 	public void process() throws InterruptedException{
 		System.out.println("Thread Local value of "+Thread.currentThread().getName()+" from called method is "+ ThreadLocalExample.getThread_local().get() );
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 	}
-	
+
+}
+record Person(String name, int age) {
 }

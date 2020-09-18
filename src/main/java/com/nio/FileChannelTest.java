@@ -10,7 +10,7 @@ public class FileChannelTest {
 
 	public static void main(String[] args) {
 		String pathSeparator= System.getProperty("file.separator");
-		try(RandomAccessFile f= new RandomAccessFile("D:"+pathSeparator+"Ajmal"+pathSeparator+"Samples"+pathSeparator+"input.txt", "rw")){
+		try(RandomAccessFile f= new RandomAccessFile(pathSeparator+"Users"+pathSeparator+"Ajmal"+pathSeparator+"Samples"+pathSeparator+"input.txt", "rw")){
 			FileChannel fchannel=f.getChannel();
 			ByteBuffer buf = ByteBuffer.allocate(24);
 
